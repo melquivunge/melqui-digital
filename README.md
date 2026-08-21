@@ -1,14 +1,22 @@
 # Melqui Digital
 
-Tema WordPress próprio de [melquivunge.com.br](https://melquivunge.com.br): hierarquia canónica de templates, CPTs, campos ACF registados em PHP, SEO/GEO e build SCSS/JS via Grunt. Sem page builder.
+[Português](#português) · [English](#english)
 
-## Requisitos
+Tema WordPress próprio de [melquivunge.com.br](https://melquivunge.com.br). Custom WordPress theme for [melquivunge.com.br](https://melquivunge.com.br).
+
+---
+
+## Português
+
+Hierarquia canónica de templates, CPTs, campos ACF registados em PHP, SEO/GEO e build SCSS/JS via Grunt. Sem page builder.
+
+### Requisitos
 
 - WordPress 6.4+
 - PHP 8.1+
 - [ACF Pro](https://www.advancedcustomfields.com/) — field groups e a página de opções vivem em `inc/fields.php` e `inc/builder.php`. Não os edites pela UI: a alteração não persiste.
 
-## Desenvolvimento
+### Desenvolvimento
 
 ```sh
 npm install
@@ -20,7 +28,7 @@ Fonte em `src/scss/` e `src/js/`. A saída (`assets/css/`, `assets/js/`) está f
 
 `style.css` existe só pelo cabeçalho exigido pelo WordPress. Os estilos reais estão em `assets/css/main.css`.
 
-## Conteúdo
+### Conteúdo
 
 | Tipo | Slug | Notas |
 |---|---|---|
@@ -30,7 +38,7 @@ Fonte em `src/scss/` e `src/js/`. A saída (`assets/css/`, `assets/js/`) está f
 
 Taxonomias: `md_project_category` e `md_stack` (partilhada pelos três CPTs). Menus: `primary` e `footer`.
 
-## Templates
+### Templates
 
 | Ficheiro | Cobre |
 |---|---|
@@ -50,7 +58,7 @@ Taxonomias: `md_project_category` e `md_stack` (partilhada pelos três CPTs). Me
 
 Partes reutilizáveis em `template-parts/`. Dados estruturados (Person, WebSite, Service, FAQPage, Article, BreadcrumbList) e `/llms.txt` em `inc/seo.php`.
 
-## Git e deploy
+### Git e deploy
 
 | Branch | O que é |
 |---|---|
@@ -63,7 +71,7 @@ A Hostinger faz `git pull` e não corre build. O branch de deploy **tem de ser `
 
 O pacote é montado por lista de inclusão explícita (`*.php`, `style.css`, `screenshot.png`, `assets/**`). `src/`, `package.json` e `.github/` não entram no webroot.
 
-### Pipelines
+#### Pipelines
 
 `security.yml` corre em push e PR para `main`, e é chamado pelo deploy como portão:
 
@@ -77,6 +85,91 @@ O pacote é montado por lista de inclusão explícita (`*.php`, `style.css`, `sc
 
 Fluxo de trabalho: branch → pull request → merge em `main`. Não se faz commit direto na `main`.
 
-## Licença
+### Licença
 
 GPL-2.0-or-later. Ver o cabeçalho de `style.css`.
+
+---
+
+## English
+
+Canonical WordPress template hierarchy, custom post types, ACF fields registered in PHP, SEO/GEO, and SCSS/JS built with Grunt. No page builder.
+
+### Requirements
+
+- WordPress 6.4+
+- PHP 8.1+
+- [ACF Pro](https://www.advancedcustomfields.com/) — field groups and the options page live in `inc/fields.php` and `inc/builder.php`. Do not edit them in the UI: the change will not persist.
+
+### Development
+
+```sh
+npm install
+npm run build   # sass → autoprefixer → cssnano → uglify
+npm run watch   # rebuild on save
+```
+
+Source lives in `src/scss/` and `src/js/`. Output (`assets/css/`, `assets/js/`) is gitignored on `main` — the pipeline generates it and publishes it to `production`. Icons in `assets/img/` are versioned.
+
+`style.css` exists only for the header WordPress requires. Real styles are in `assets/css/main.css`.
+
+### Content
+
+| Type | Slug | Notes |
+|---|---|---|
+| Projects | `md_project` | archive `/projetos/` |
+| Services | `md_service` | archive `/servicos/` |
+| Experience | `md_experience` | no public URL; rendered on home and About |
+
+Taxonomies: `md_project_category` and `md_stack` (shared across the three CPTs). Menus: `primary` and `footer`.
+
+### Templates
+
+| File | Covers |
+|---|---|
+| `front-page.php` | home |
+| `page.php` | generic pages |
+| `page-sobre.php` | About |
+| `page-contato.php` | Contact |
+| `page-en.php` | English one-pager (`/en/`) |
+| `archive-md_project.php` | projects |
+| `archive-md_service.php` | services |
+| `single-md_project.php` | case study |
+| `single-md_service.php` | service |
+| `single.php` | article |
+| `home.php` | blog index |
+| `index.php` | search, taxonomies, fallback |
+| `404.php` | not found |
+
+Reusable parts live in `template-parts/`. Structured data (Person, WebSite, Service, FAQPage, Article, BreadcrumbList) and `/llms.txt` are in `inc/seo.php`.
+
+### Git and deploy
+
+| Branch | What it is |
+|---|---|
+| `main` | Source. SCSS, JS, Gruntfile, `package.json`. |
+| `production` | What Hostinger serves. PHP and compiled assets. Nothing else. |
+
+`production` is a derived artefact: the pipeline rebuilds it and force-pushes on every push to `main`. Do not work on it.
+
+Hostinger runs `git pull` and no build. The deploy branch **must be `production`**. Pointed at `main`, the site has no CSS.
+
+The package is assembled from an explicit include list (`*.php`, `style.css`, `screenshot.png`, `assets/**`). `src/`, `package.json` and `.github/` do not enter the webroot.
+
+#### Pipelines
+
+`security.yml` runs on push and PR to `main`, and is called by deploy as a gate:
+
+- gitleaks over the full history
+- forbidden-file gate (`.env`, `wp-config.php`, keys)
+- PHP 8.1 syntax and a required `ABSPATH` guard in every `.php` file
+- banned functions (`eval`, `shell_exec`, …)
+- `npm audit` — production dependencies block; build dependencies warn
+
+`deploy.yml` compiles, confirms CSS/JS are not empty, assembles the package and publishes to `production`. `v*` tags stamp `Version:` in `style.css`.
+
+Workflow: branch → pull request → merge to `main`. No commits directly on `main`.
+
+### License
+
+GPL-2.0-or-later. See the header in `style.css`.
