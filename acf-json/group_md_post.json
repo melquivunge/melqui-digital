@@ -1,0 +1,47 @@
+{
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1787278761,
+    "key": "group_md_post",
+    "title": "Artigo — resposta direta",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "fields": [
+        {
+            "key": "field_md_po_answer",
+            "name": "answer",
+            "label": "Resposta direta",
+            "instructions": "Resposta curta e completa no topo do artigo, para leitores e answer engines (GEO). Deve fazer sentido isolada do resto do texto.",
+            "type": "textarea",
+            "rows": 4,
+            "maxlength": 600
+        },
+        {
+            "key": "field_md_po_reading",
+            "name": "reading_time",
+            "label": "Tempo de leitura",
+            "type": "text"
+        },
+        {
+            "key": "field_md_po_featured",
+            "name": "featured",
+            "label": "Artigo em destaque",
+            "type": "true_false",
+            "ui": 1
+        }
+    ]
+}

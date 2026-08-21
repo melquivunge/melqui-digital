@@ -1,0 +1,440 @@
+{
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1787278761,
+    "key": "group_md_options",
+    "title": "Conteúdo global",
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "md-site-options"
+            }
+        ]
+    ],
+    "fields": [
+        {
+            "key": "field_md_op_email",
+            "name": "contact_email",
+            "label": "E-mail de contato",
+            "type": "email"
+        },
+        {
+            "key": "field_md_op_social",
+            "name": "social_links",
+            "label": "Redes",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Adicionar rede",
+            "sub_fields": [
+                {
+                    "key": "field_md_op_social_label",
+                    "name": "label",
+                    "label": "Nome",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_md_op_social_url",
+                    "name": "url",
+                    "label": "URL",
+                    "type": "url",
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_op_brand_tag",
+            "name": "brand_tagline",
+            "label": "Tagline da marca",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_logo",
+            "name": "brand_logo",
+            "label": "Logo",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_md_op_cta1_label",
+            "name": "cta_label",
+            "label": "CTA principal — texto",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_cta1_url",
+            "name": "cta_url",
+            "label": "CTA principal — link",
+            "type": "url"
+        },
+        {
+            "key": "field_md_op_about_eyebrow",
+            "name": "about_eyebrow",
+            "label": "Sobre — sobrelinha do hero",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_about_text",
+            "name": "about_text",
+            "label": "Sobre — texto do hero",
+            "type": "textarea",
+            "rows": 5
+        },
+        {
+            "key": "field_md_sec_progress_eyebrow",
+            "name": "progress_eyebrow",
+            "label": "Sobre: progressão — sobrelinha",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_progress_title",
+            "name": "progress_title",
+            "label": "Sobre: progressão — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_xp_eyebrow",
+            "name": "xp_eyebrow",
+            "label": "Sobre: experiência — sobrelinha",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_xp_title",
+            "name": "xp_title",
+            "label": "Sobre: experiência — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_principles_eyebrow",
+            "name": "principles_eyebrow",
+            "label": "Sobre: princípios — sobrelinha",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_principles_title",
+            "name": "principles_title",
+            "label": "Sobre: princípios — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_principles",
+            "name": "principles",
+            "label": "Princípios de engenharia",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar princípio",
+            "sub_fields": [
+                {
+                    "key": "field_md_op_prin_title",
+                    "name": "title",
+                    "label": "Título",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_md_op_prin_text",
+                    "name": "text",
+                    "label": "Texto",
+                    "type": "textarea",
+                    "rows": 3,
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_sec_stackfund_eyebrow",
+            "name": "stackfund_eyebrow",
+            "label": "Sobre: stack — sobrelinha",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_stackfund_title",
+            "name": "stackfund_title",
+            "label": "Sobre: stack — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_education",
+            "name": "education",
+            "label": "Formação e base",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Adicionar item",
+            "sub_fields": [
+                {
+                    "key": "field_md_op_edu_label",
+                    "name": "label",
+                    "label": "Rótulo",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_md_op_edu_value",
+                    "name": "value",
+                    "label": "Valor",
+                    "type": "text",
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_op_next_ab_title",
+            "name": "next_about_title",
+            "label": "Próximo passo em Sobre — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_next_ab_text",
+            "name": "next_about_text",
+            "label": "Próximo passo em Sobre — texto",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_sec_arch_projects_eyebrow",
+            "name": "arch_projects_eyebrow",
+            "label": "Arquivo de projetos — sobrelinha",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_arch_projects_title",
+            "name": "arch_projects_title",
+            "label": "Arquivo de projetos — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_arch_projects_text",
+            "name": "arch_projects_text",
+            "label": "Arquivo de projetos — texto",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_sec_arch_services_eyebrow",
+            "name": "arch_services_eyebrow",
+            "label": "Arquivo de serviços — sobrelinha",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_arch_services_title",
+            "name": "arch_services_title",
+            "label": "Arquivo de serviços — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_arch_services_text",
+            "name": "arch_services_text",
+            "label": "Arquivo de serviços — texto",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_sec_arch_blog_eyebrow",
+            "name": "arch_blog_eyebrow",
+            "label": "Arquivo do blog — sobrelinha",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_arch_blog_title",
+            "name": "arch_blog_title",
+            "label": "Arquivo do blog — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_arch_blog_text",
+            "name": "arch_blog_text",
+            "label": "Arquivo do blog — texto",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_sec_oldwork_eyebrow",
+            "name": "oldwork_eyebrow",
+            "label": "Portfólio anterior — sobrelinha",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_oldwork_title",
+            "name": "oldwork_title",
+            "label": "Portfólio anterior — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sec_oldwork_text",
+            "name": "oldwork_text",
+            "label": "Portfólio anterior — texto",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_oldwork_items",
+            "name": "oldwork_items",
+            "label": "Portfólio anterior — nomes",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Adicionar projeto",
+            "sub_fields": [
+                {
+                    "key": "field_md_oldwork_items_item",
+                    "name": "item",
+                    "label": "Item",
+                    "type": "text",
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_op_next_pjs_title",
+            "name": "next_projects_title",
+            "label": "Próximo passo no arquivo de projetos — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_next_pjs_text",
+            "name": "next_projects_text",
+            "label": "Próximo passo no arquivo de projetos — texto",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_op_next_svs_title",
+            "name": "next_services_title",
+            "label": "Próximo passo no arquivo de serviços — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_next_svs_text",
+            "name": "next_services_text",
+            "label": "Próximo passo no arquivo de serviços — texto",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_op_news_title",
+            "name": "news_title",
+            "label": "Newsletter — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_news_text",
+            "name": "news_text",
+            "label": "Newsletter — texto",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_md_op_next_eyebrow",
+            "name": "next_eyebrow",
+            "label": "Próximo passo — sobrelinha",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_next_title",
+            "name": "next_title",
+            "label": "Próximo passo — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_next_text",
+            "name": "next_text",
+            "label": "Próximo passo — texto",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_op_next_label",
+            "name": "next_label",
+            "label": "Próximo passo — botão",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_next_pj_title",
+            "name": "next_project_title",
+            "label": "Próximo passo em projeto — título",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_next_pj_text",
+            "name": "next_project_text",
+            "label": "Próximo passo em projeto — texto",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_op_footer_text",
+            "name": "footer_text",
+            "label": "Rodapé — descrição",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_md_op_footer_meta",
+            "name": "footer_meta",
+            "label": "Rodapé — localização",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_footer_note",
+            "name": "footer_note",
+            "label": "Rodapé — assinatura",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_footer_stack",
+            "name": "footer_stack",
+            "label": "Rodapé — stack",
+            "type": "text"
+        },
+        {
+            "key": "field_md_op_caps",
+            "name": "capability_groups",
+            "label": "Grupos de capacidades",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar grupo",
+            "sub_fields": [
+                {
+                    "key": "field_md_op_caps_area",
+                    "name": "area",
+                    "label": "Área",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_md_op_caps_lead",
+                    "name": "lead",
+                    "label": "Descrição",
+                    "type": "textarea",
+                    "rows": 2
+                },
+                {
+                    "key": "field_md_op_caps_items",
+                    "name": "items",
+                    "label": "Itens",
+                    "type": "repeater",
+                    "layout": "table",
+                    "button_label": "Adicionar item",
+                    "sub_fields": [
+                        {
+                            "key": "field_md_op_caps_items_item",
+                            "name": "item",
+                            "label": "Item",
+                            "type": "text",
+                            "required": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

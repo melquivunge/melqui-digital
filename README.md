@@ -8,13 +8,13 @@ Tema WordPress próprio de [melquivunge.com.br](https://melquivunge.com.br). Cus
 
 ## Português
 
-Hierarquia canónica de templates, CPTs, campos ACF registados em PHP, SEO/GEO e build SCSS/JS via Grunt. Sem page builder.
+Hierarquia canónica de templates, CPTs, field groups ACF em JSON, SEO/GEO e build SCSS/JS via Grunt. Sem page builder.
 
 ### Requisitos
 
 - WordPress 6.4+
 - PHP 8.1+
-- [ACF Pro](https://www.advancedcustomfields.com/) — field groups e a página de opções vivem em `inc/fields.php` e `inc/builder.php`. Não os edites pela UI: a alteração não persiste.
+- [ACF Pro](https://www.advancedcustomfields.com/) — field groups em `acf-json/`; a página de opções em `inc/fields.php`.
 
 ### Desenvolvimento
 
@@ -37,6 +37,12 @@ Fonte em `src/scss/` e `src/js/`. A saída (`assets/css/`, `assets/js/`) está f
 | Experiência | `md_experience` | sem URL pública; renderiza na home e no Sobre |
 
 Taxonomias: `md_project_category` e `md_stack` (partilhada pelos três CPTs). Menus: `primary` e `footer`.
+
+### ACF JSON
+
+Os grupos estão em `acf-json/` (`group_md_*.json`). As chaves dos campos são as mesmas de quando estavam em PHP, portanto o meta já gravado nos posts não muda.
+
+Na primeira visita a **Campos personalizados → Grupos de campos**, o ACF pede **Sync**. Depois disso os grupos são editáveis na UI e gravar escreve o JSON no tema. Commit esse JSON. Edições feitas em produção desaparecem no próximo deploy — o sítio certo é o ambiente local.
 
 ### Templates
 
@@ -69,7 +75,7 @@ Partes reutilizáveis em `template-parts/`. Dados estruturados (Person, WebSite,
 
 A Hostinger faz `git pull` e não corre build. O branch de deploy **tem de ser `production`**. Apontado a `main`, o site fica sem CSS.
 
-O pacote é montado por lista de inclusão explícita (`*.php`, `style.css`, `screenshot.png`, `assets/**`). `src/`, `package.json` e `.github/` não entram no webroot.
+O pacote é montado por lista de inclusão explícita (`*.php`, `style.css`, `screenshot.png`, `assets/**`, `acf-json/**`). `src/`, `package.json` e `.github/` não entram no webroot.
 
 #### Pipelines
 
@@ -93,13 +99,13 @@ GPL-2.0-or-later. Ver o cabeçalho de `style.css`.
 
 ## English
 
-Canonical WordPress template hierarchy, custom post types, ACF fields registered in PHP, SEO/GEO, and SCSS/JS built with Grunt. No page builder.
+Canonical WordPress template hierarchy, custom post types, ACF field groups in JSON, SEO/GEO, and SCSS/JS built with Grunt. No page builder.
 
 ### Requirements
 
 - WordPress 6.4+
 - PHP 8.1+
-- [ACF Pro](https://www.advancedcustomfields.com/) — field groups and the options page live in `inc/fields.php` and `inc/builder.php`. Do not edit them in the UI: the change will not persist.
+- [ACF Pro](https://www.advancedcustomfields.com/) — field groups in `acf-json/`; the options page in `inc/fields.php`.
 
 ### Development
 
@@ -122,6 +128,12 @@ Source lives in `src/scss/` and `src/js/`. Output (`assets/css/`, `assets/js/`) 
 | Experience | `md_experience` | no public URL; rendered on home and About |
 
 Taxonomies: `md_project_category` and `md_stack` (shared across the three CPTs). Menus: `primary` and `footer`.
+
+### ACF JSON
+
+Groups live in `acf-json/` (`group_md_*.json`). Field keys are unchanged from the PHP version, so existing post meta keeps working.
+
+On the first visit to **Custom Fields → Field Groups**, ACF will offer **Sync**. After that the groups are editable in the UI and saving writes JSON back into the theme. Commit that JSON. Edits made on production are wiped by the next deploy — change them locally.
 
 ### Templates
 
@@ -154,7 +166,7 @@ Reusable parts live in `template-parts/`. Structured data (Person, WebSite, Serv
 
 Hostinger runs `git pull` and no build. The deploy branch **must be `production`**. Pointed at `main`, the site has no CSS.
 
-The package is assembled from an explicit include list (`*.php`, `style.css`, `screenshot.png`, `assets/**`). `src/`, `package.json` and `.github/` do not enter the webroot.
+The package is assembled from an explicit include list (`*.php`, `style.css`, `screenshot.png`, `assets/**`, `acf-json/**`). `src/`, `package.json` and `.github/` do not enter the webroot.
 
 #### Pipelines
 
