@@ -1,0 +1,145 @@
+{
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1787278761,
+    "key": "group_md_project",
+    "title": "Projeto — detalhes",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "md_project"
+            }
+        ]
+    ],
+    "fields": [
+        {
+            "key": "field_md_pj_context",
+            "name": "context",
+            "label": "Contexto",
+            "type": "text",
+            "instructions": "Ex.: \"IBM · via Hogarth\". Cliente e intermediário."
+        },
+        {
+            "key": "field_md_pj_engagement",
+            "name": "engagement",
+            "label": "Engajamento",
+            "type": "text",
+            "instructions": "Enquadramento do vínculo — nunca implica emprego direto."
+        },
+        {
+            "key": "field_md_pj_year",
+            "name": "year",
+            "label": "Período",
+            "type": "text"
+        },
+        {
+            "key": "field_md_pj_role",
+            "name": "role",
+            "label": "Papel",
+            "type": "text"
+        },
+        {
+            "key": "field_md_pj_status",
+            "name": "status",
+            "label": "Status",
+            "type": "text"
+        },
+        {
+            "key": "field_md_pj_impact",
+            "name": "impact",
+            "label": "Impacto",
+            "type": "textarea",
+            "rows": 4
+        },
+        {
+            "key": "field_md_pj_img_note",
+            "name": "image_note",
+            "label": "Nota da imagem",
+            "type": "text"
+        },
+        {
+            "key": "field_md_pj_ext_label",
+            "name": "external_label",
+            "label": "Rótulo do link externo",
+            "type": "text"
+        },
+        {
+            "key": "field_md_pj_ext_url",
+            "name": "external_url",
+            "label": "URL externa",
+            "type": "url"
+        },
+        {
+            "key": "field_md_pj_home_label",
+            "name": "home_label",
+            "label": "Rótulo na home",
+            "instructions": "Usado só nos dois destaques do topo. Vazio = categoria · engajamento.",
+            "type": "text"
+        },
+        {
+            "key": "field_md_pj_featured",
+            "name": "featured",
+            "label": "Destaque",
+            "type": "true_false",
+            "ui": 1
+        },
+        {
+            "key": "field_md_pj_facts",
+            "name": "facts",
+            "label": "Ficha técnica",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Adicionar item",
+            "sub_fields": [
+                {
+                    "key": "field_md_pj_fact_label",
+                    "name": "label",
+                    "label": "Rótulo",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_md_pj_fact_value",
+                    "name": "value",
+                    "label": "Valor",
+                    "type": "text",
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_pj_sections",
+            "name": "sections",
+            "label": "Seções do case study",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar seção",
+            "sub_fields": [
+                {
+                    "key": "field_md_pj_sec_title",
+                    "name": "title",
+                    "label": "Título",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_md_pj_sec_body",
+                    "name": "body",
+                    "label": "Texto",
+                    "type": "wysiwyg",
+                    "media_upload": 0,
+                    "toolbar": "basic"
+                }
+            ]
+        }
+    ]
+}
