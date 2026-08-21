@@ -133,7 +133,8 @@
 .next {
   background: var(--ink);
   color: var(--paper);
-  border-block: 1px solid var(--border);
+  color-scheme: dark;
+  border-block-start: 1px solid var(--border);
 
   &__inner {
     display: grid;
