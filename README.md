@@ -42,7 +42,9 @@ Taxonomias: `md_project_category` e `md_stack` (partilhada pelos três CPTs). Me
 
 Os grupos estão em `acf-json/` (`group_md_*.json`). As chaves dos campos são as mesmas de quando estavam em PHP, portanto o meta já gravado nos posts não muda.
 
-Na primeira visita a **Campos personalizados → Grupos de campos**, o ACF pede **Sync**. Depois disso os grupos são editáveis na UI e gravar escreve o JSON no tema. Commit esse JSON. Edições feitas em produção desaparecem no próximo deploy — o sítio certo é o ambiente local.
+O construtor de seções (`sections`) continua um único flexible content — partir em vários campos esvaziaria a home. Hero, Escala, Trajetória e Fechamento usam **tabs** por dentro para agrupar subcampos.
+
+Na primeira visita a **Campos personalizados → Grupos de campos**, o ACF pede **Sync**. Depois disso os grupos são editáveis na UI. Com `WP_DEBUG` ligado, gravar escreve o JSON no tema (commit esse ficheiro). Em produção o tema não é escrito: o próximo deploy é a fonte da verdade.
 
 ### Templates
 
@@ -133,7 +135,9 @@ Taxonomies: `md_project_category` and `md_stack` (shared across the three CPTs).
 
 Groups live in `acf-json/` (`group_md_*.json`). Field keys are unchanged from the PHP version, so existing post meta keeps working.
 
-On the first visit to **Custom Fields → Field Groups**, ACF will offer **Sync**. After that the groups are editable in the UI and saving writes JSON back into the theme. Commit that JSON. Edits made on production are wiped by the next deploy — change them locally.
+The section builder (`sections`) stays a single flexible content field — splitting it would empty the home page. Hero, Scale, Career and Closing use **tabs** inside each layout to group sub-fields.
+
+On the first visit to **Custom Fields → Field Groups**, ACF will offer **Sync**. After that the groups are editable in the UI. With `WP_DEBUG` on, saving writes JSON back into the theme (commit that file). In production the theme is not written: the next deploy is the source of truth.
 
 ### Templates
 

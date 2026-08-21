@@ -15,7 +15,14 @@ defined( 'ABSPATH' ) || exit;
 add_filter(
 	'acf/settings/save_json',
 	static function ( string $path ): string {
-		return MD_DIR . '/acf-json';
+		// Local (WP_DEBUG): write into the theme so edits can be committed.
+		// Production: do not write the theme directory. Load still comes from
+		// acf-json/; the next deploy is the source of truth.
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			return MD_DIR . '/acf-json';
+		}
+
+		return MD_DIR . '/acf-json-disabled';
 	}
 );
 
