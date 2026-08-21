@@ -253,10 +253,11 @@
 
 .mono-link--muted { color: var(--muted-foreground); }
 
-/* --- Fechamento --- */
+/* --- Fechamento: last content act. Footer is paper chrome underneath. --- */
 .closing {
   background: var(--graphite);
   color: var(--ivory);
+  color-scheme: dark;
 
   &__title { max-width: 18ch; margin-block-end: 3.5rem; }
 
