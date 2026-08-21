@@ -1,0 +1,97 @@
+name: Segurança
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_call:   # o deploy chama isto como portão antes de publicar
+
+permissions:
+  contents: read
+
+jobs:
+  segredos:
+    name: Segredos e ficheiros proibidos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # gitleaks precisa do histórico todo, não só do último commit
+
+      - name: Varrer histórico à procura de segredos
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Ficheiros que nunca podem entrar no repositório
+        run: |
+          # Não é redundante com o .gitignore: o .gitignore é uma intenção que
+          # `git add -f` ignora. Isto é o portão.
+          padroes='(^|/)\.env($|\.)|(^|/)wp-config\.php$|\.(sql|sql\.gz|sqlite|pem|key|p12|pfx)$|(^|/)\.htpasswd$|(^|/)id_(rsa|ed25519)$'
+          encontrados=$(git ls-files | grep -iE "$padroes" || true)
+          if [ -n "$encontrados" ]; then
+            echo "::error::Ficheiros sensíveis versionados:"
+            echo "$encontrados"
+            exit 1
+          fi
+          echo "Nenhum ficheiro sensível versionado."
+
+  php:
+    name: PHP — sintaxe e regras do tema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'   # o mínimo declarado em style.css: se parte aqui, parte em produção
+          coverage: none
+
+      - name: Sintaxe
+        run: |
+          erros=0
+          for f in $(git ls-files '*.php'); do
+            php -l "$f" > /dev/null || { echo "::error file=$f::erro de sintaxe"; erros=1; }
+          done
+          exit $erros
+
+      - name: Guarda ABSPATH em todos os ficheiros
+        run: |
+          # Sem esta guarda, abrir o .php pelo URL direto executa-o fora do
+          # WordPress — sem utilizador, sem nonce, sem capacidades.
+          falhou=0
+          for f in $(git ls-files '*.php'); do
+            grep -q "defined( 'ABSPATH' )" "$f" || { echo "::error file=$f::sem guarda ABSPATH"; falhou=1; }
+          done
+          exit $falhou
+
+      - name: Funções proibidas
+        run: |
+          padrao='\b(eval|assert|create_function|shell_exec|passthru|proc_open|popen|system|exec|base64_decode|unserialize)[[:space:]]*\('
+          if grep -rnE "$padrao" $(git ls-files '*.php'); then
+            echo "::error::Função proibida encontrada."
+            exit 1
+          fi
+          echo "Nenhuma função proibida."
+
+      - name: Superglobais sem sanitização
+        run: |
+          # $_GET/$_POST/$_REQUEST têm de passar por wp_unslash + sanitize_*.
+          # Sinaliza, não bloqueia: há usos legítimos que este regex não entende.
+          grep -rnE '\$_(GET|POST|REQUEST)\[' $(git ls-files '*.php') \
+            | grep -vE 'wp_unslash|sanitize_|wp_verify_nonce|absint|\(int\)|empty\(|isset\(' \
+            && echo "::warning::Superglobais acima sem sanitização visível." || true
+
+  dependencias:
+    name: Dependências de build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Auditar
+        run: npm audit --audit-level=high

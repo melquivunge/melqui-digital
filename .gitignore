@@ -1,2 +1,6 @@
 node_modules/
 .DS_Store
+
+# Build output — gerado pela pipeline, servido a partir do branch production
+assets/css/
+assets/js/

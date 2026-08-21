@@ -1,0 +1,106 @@
+name: Build e deploy
+
+# A Hostinger faz git pull e não corre build nenhum. Então o branch que ela
+# serve tem de já conter os assets compilados — e só o que o servidor precisa
+# de executar. É por isso que existem dois branches:
+#
+#   main        fonte. SCSS, JS não minificado, Gruntfile, package.json.
+#   production  o que fica no servidor. PHP + assets compilados. Mais nada.
+#
+# Publicar o src/ no webroot entregaria a qualquer visitante o SCSS, as versões
+# exatas das dependências de build e o Gruntfile. Não é uma falha crítica, mas
+# é informação que não tem razão nenhuma para estar lá.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false   # dois deploys em paralelo dariam force-push a correr um contra o outro
+
+jobs:
+  seguranca:
+    uses: ./.github/workflows/security.yml
+
+  build:
+    needs: seguranca
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Compilar SCSS e JS
+        run: npm run build
+
+      - name: Confirmar que o build produziu alguma coisa
+        run: |
+          # Um build silenciosamente vazio dava deploy de um site sem estilos.
+          for f in assets/css/main.css assets/js/main.js; do
+            [ -s "$f" ] || { echo "::error::$f vazio ou inexistente"; exit 1; }
+          done
+          echo "CSS: $(wc -c < assets/css/main.css) bytes · JS: $(wc -c < assets/js/main.js) bytes"
+
+      - name: Carimbar a versão do tema a partir da tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          versao="${GITHUB_REF_NAME#v}"
+          sed -i "s/^Version: .*/Version: ${versao}/" style.css
+          echo "style.css marcado como ${versao}"
+
+      - name: Montar só o que o servidor executa
+        run: |
+          mkdir -p ../dist
+          # Lista explícita: um deploy que copia tudo menos exclusões acaba
+          # sempre por publicar o ficheiro que alguém esqueceu de excluir.
+          # A ordem importa: as exclusões de diretório vêm primeiro, senão o
+          # --include='*/' entra no node_modules e qualquer .php de dependência
+          # é copiado para o webroot.
+          rsync -a --prune-empty-dirs \
+            --exclude='node_modules/' \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='src/' \
+            --include='*/' \
+            --include='*.php' \
+            --include='style.css' \
+            --include='screenshot.png' \
+            --include='assets/**' \
+            --exclude='*' \
+            ./ ../dist/
+          echo "--- vai para o servidor ---"
+          find ../dist -type f | sed 's|^../dist/||' | sort
+
+      - name: Verificar que nada indevido entrou no pacote
+        run: |
+          if find ../dist -type f \( -name '*.scss' -o -name 'package*.json' -o -name 'Gruntfile.js' -o -name '.env*' \) | grep .; then
+            echo "::error::Ficheiro de desenvolvimento no pacote de deploy."
+            exit 1
+          fi
+          echo "Pacote limpo."
+
+      - name: Publicar no branch production
+        run: |
+          cd ../dist
+          git init -q -b production
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Build de ${GITHUB_SHA::7} (${GITHUB_REF_NAME})"
+          # force-push: production é um artefacto derivado, não tem histórico
+          # próprio a preservar. É sempre reconstruível a partir de main.
+          git push -q --force \
+            "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" \
+            production
+          echo "production atualizado."

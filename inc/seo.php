@@ -508,7 +508,8 @@ function md_llms_txt(): string {
 add_action(
 	'init',
 	static function (): void {
-		$path = wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH );
+		$uri  = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		$path = wp_parse_url( $uri, PHP_URL_PATH );
 
 		if ( '/llms.txt' !== $path ) {
 			return;
