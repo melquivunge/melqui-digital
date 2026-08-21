@@ -1,0 +1,16 @@
+// Melqui's Digital Forge — entry point.
+// Built by Grunt: src/scss/main.scss -> assets/css/main.css (autoprefixed + minified)
+//
+// Order matters: base UI components come before the feature partials, so a
+// section can override a component (a hidden header CTA, an accent eyebrow)
+// without needing extra specificity.
+@use 'tokens' as *;
+@use 'base';
+@use 'components';
+@use 'layout';
+@use 'header';
+@use 'hero';
+@use 'work';
+@use 'sections';
+@use 'single';
+@use 'archive';

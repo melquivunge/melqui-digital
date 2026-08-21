@@ -1,0 +1,244 @@
+@use 'tokens' as *;
+
+.arch-hero {
+  padding-block: 2.5rem 4rem;
+
+  h1 { max-width: 18ch; margin-block: 1rem 0; }
+}
+
+/* --- Projetos: lista editorial alternada --- */
+.stack {
+  display: grid;
+  gap: 5rem;
+  margin-block-start: 3rem;
+
+  &__item {
+    display: grid;
+    gap: 1.5rem;
+
+    @include up($bp-lg) { max-width: 78%; }
+  }
+
+  // Every other item shifts right, as in the reference.
+  &__item--right {
+    @include up($bp-lg) { margin-inline-start: auto; }
+  }
+
+  &__media img { width: 100%; height: auto; display: block; }
+
+  &__body {
+    display: grid;
+    gap: 0.55rem;
+
+    .eyebrow { margin: 0; }
+    > p { margin: 0; color: var(--muted-foreground); max-width: 62ch; }
+    .tags { margin-block: 0.75rem 0.25rem; }
+  }
+
+  &__title {
+    margin: 0.35rem 0 0;
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+    letter-spacing: -0.03em;
+
+    a { text-decoration: none; }
+    a:hover { color: var(--primary); }
+  }
+
+  &__note { font-size: 0.8125rem; }
+}
+
+.oldwork {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0 2.5rem;
+
+  @include up($bp-sm) { grid-template-columns: repeat(2, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(3, 1fr); }
+
+  li {
+    border-block-start: 1px solid var(--border);
+    padding-block: 1rem;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    color: var(--muted-foreground);
+  }
+
+  &__title { font-size: clamp(1.35rem, 2vw, 1.75rem); letter-spacing: -0.025em; margin: 1rem 0 0; }
+  &__text { font-size: 0.9375rem; color: var(--muted-foreground); margin-block-start: 1.25rem; }
+}
+
+/* --- Serviços: três colunas por linha --- */
+.svc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    display: grid;
+    gap: 1.5rem;
+    padding-block: 3rem;
+    border-block-end: 1px solid var(--border);
+
+    @include up($bp-lg) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr); gap: 3rem; }
+
+    &:first-child { border-block-start: 1px solid var(--border); }
+
+    .eyebrow { margin: 0 0 0.9rem; }
+  }
+
+  &__title {
+    margin: 0.75rem 0 0.75rem;
+    font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+
+    a { text-decoration: none; }
+    a:hover { color: var(--primary); }
+  }
+
+  &__tagline { margin: 0; font-size: 0.875rem; color: var(--muted-foreground); }
+
+  &__summary { margin: 0 0 1.5rem; font-size: 0.9375rem; color: var(--muted-foreground); }
+
+  .mono-link { display: inline-block; margin-block-start: 1.5rem; }
+}
+
+/* --- Blog --- */
+.feature {
+  display: grid;
+  gap: 2.5rem;
+  margin-block-start: 2rem;
+
+  @include up($bp-lg) { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 4rem; }
+
+  &__title {
+    margin: 0.75rem 0 1.25rem;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+
+    a { text-decoration: none; }
+    a:hover { color: var(--primary); }
+  }
+
+  > div > p { color: var(--muted-foreground); max-width: 60ch; }
+
+  &__answer {
+    border-inline-start: 1px solid var(--border);
+    padding-inline-start: 2rem;
+
+    p { font-size: 0.9375rem; color: var(--muted-foreground); }
+    .eyebrow { margin-block-start: 1.5rem; }
+  }
+}
+
+.filter-bar {
+  background: var(--surface);
+  border-block: 1px solid var(--border);
+  padding-block: 1.25rem;
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .tags { margin: 0; }
+
+  form {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    // Fills the row once the pills no longer share the line with it.
+    flex: 1 1 16rem;
+  }
+
+  input[type="search"] {
+    // min-width:16rem was wider than a 320px viewport minus gutters and button.
+    flex: 1 1 10rem;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    font: inherit;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--foreground);
+  }
+
+  button {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    font: inherit;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--paper);
+    cursor: pointer;
+  }
+}
+
+.post-grid {
+  display: grid;
+  gap: 3rem 2.5rem;
+
+  @include up($bp-md) { grid-template-columns: repeat(2, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.post-card {
+  border-block-start: 1px solid var(--border);
+  padding-block-start: 1.25rem;
+
+  .eyebrow { margin: 0; }
+  > p { color: var(--muted-foreground); font-size: 0.9375rem; }
+  .eyebrow:last-child { margin-block-start: 1.5rem; }
+
+  &__title {
+    margin: 0.75rem 0 0.9rem;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+
+    a { text-decoration: none; }
+    a:hover { color: var(--primary); }
+  }
+}
+
+.newsletter {
+  &__inner {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+
+    @include up($bp-lg) { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 4rem; }
+  }
+
+  &__title { font-size: clamp(1.35rem, 2.4vw, 1.9rem); letter-spacing: -0.03em; margin: 0; }
+  &__text { margin: 0.75rem 0 0; color: var(--muted-foreground); font-size: 0.9375rem; }
+
+  &__form {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+
+    input[type="email"] {
+      flex: 1 1 14rem;
+      min-height: 44px;
+      padding: 0.6rem 1rem;
+      font: inherit;
+      font-size: 0.9375rem;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--foreground);
+    }
+  }
+
+  .notice { margin-block: 1.25rem 0; }
+}

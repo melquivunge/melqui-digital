@@ -1,0 +1,30 @@
+@use 'tokens' as *;
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: 5rem;
+
+  @include up($bp-md) { padding-block: 7rem; }
+
+  &--dark {
+    background: var(--graphite);
+    color: var(--ivory);
+  }
+
+  &--muted { background: var(--ivory-deep); }
+  &--bordered { border-block-start: 1px solid var(--border); }
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+
+  &--2 { @include up($bp-md) { grid-template-columns: repeat(2, 1fr); } }
+  &--3 { @include up($bp-md) { grid-template-columns: repeat(3, 1fr); } }
+}

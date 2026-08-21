@@ -1,0 +1,47 @@
+// Design tokens ported 1:1 from the React app (src/styles.css, "v2" block).
+// Values are not re-invented — keep them in sync with the original.
+
+:root {
+  --graphite: oklch(0.145 0.008 260);
+  --graphite-soft: oklch(0.198 0.009 262);
+  --graphite-line: oklch(1 0 0 / 13%);
+  --ivory: oklch(0.968 0.009 92);
+  --ivory-deep: oklch(0.941 0.012 92);
+
+  --paper: oklch(0.975 0.006 92);
+  --surface: var(--ivory-deep);
+  --ink: oklch(0.17 0.005 260);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+
+  --primary: oklch(0.556 0.229 27.5);
+  --primary-foreground: oklch(0.985 0.002 95);
+  --accent: oklch(0.94 0.03 27);
+  --accent-foreground: oklch(0.42 0.19 27);
+
+  --muted-foreground: oklch(0.475 0.008 265);
+  --border: oklch(0.885 0.006 95);
+  --border-strong: oklch(0.78 0.008 95);
+  --ring: var(--primary);
+
+  --radius: 0.25rem;
+  --shadow-lift: 0 1px 2px oklch(0 0 0 / 0.04), 0 12px 32px -18px oklch(0 0 0 / 0.28);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --container: 76rem;
+  --gutter: 1.5rem;
+}
+
+// Breakpoints — mobile first.
+$bp-sm: 40rem;
+$bp-md: 48rem;
+$bp-lg: 64rem;
+$bp-xl: 80rem;
+
+@mixin up($bp) {
+  @media (min-width: $bp) { @content; }
+}

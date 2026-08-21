@@ -1,0 +1,289 @@
+@use 'tokens' as *;
+
+/* --- Escala: dark panel with the same hairline grid as the hero --- */
+.scale {
+  position: relative;
+  background: var(--graphite);
+  color: var(--ivory);
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(to right, var(--graphite-line) 0 1px, transparent 1px 6rem),
+      repeating-linear-gradient(to bottom, var(--graphite-line) 0 1px, transparent 1px 6rem);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &__inner {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+
+    @include up($bp-lg) { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.55fr); gap: 4rem; }
+  }
+
+  &__head .eyebrow { margin-block-end: 1.25rem; }
+  &__head h2 { max-width: 12ch; }
+  &__lede { color: oklch(0.82 0.006 92); max-width: 42ch; margin-block-start: 1.75rem; }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+
+    @include up($bp-sm) { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  &__item {
+    padding: 2rem 0 2rem 2rem;
+    border-block-start: 1px solid var(--graphite-line);
+
+    &:nth-child(odd) { border-inline-end: 1px solid var(--graphite-line); }
+    &:nth-child(-n+2) { border-block-start: 0; }
+
+    h3 { font-size: 1.2rem; margin: 0.6rem 0 0.5rem; }
+    p { margin: 0; color: oklch(0.78 0.006 92); font-size: 0.9375rem; }
+  }
+
+  &__n {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+    margin: 0;
+  }
+}
+
+/* --- Serviços: hairline-separated rows --- */
+.rows {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+  border-block-start: 1px solid var(--border);
+
+  &__item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0.5rem 1.5rem;
+    align-items: baseline;
+    padding-block: 2rem;
+    border-block-end: 1px solid var(--border);
+
+    @include up($bp-lg) { grid-template-columns: 5rem minmax(0, 1fr) minmax(0, 1fr) 2rem; }
+  }
+
+  &__n {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    color: var(--primary);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+    letter-spacing: -0.025em;
+
+    a { text-decoration: none; }
+    a:hover { color: var(--primary); }
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--muted-foreground);
+    font-size: 0.9375rem;
+    grid-column: 2 / -1;
+
+    @include up($bp-lg) { grid-column: auto; }
+  }
+
+  &__arrow { color: var(--muted-foreground); justify-self: end; display: none; @include up($bp-lg) { display: block; } }
+}
+
+/* --- Trajetória --- */
+.split {
+  display: grid;
+  gap: 3rem;
+
+  @include up($bp-lg) { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.7fr); gap: 4rem; }
+
+  &__aside {
+    h2 { margin-block: 0.75rem 1.25rem; }
+    p { color: var(--muted-foreground); max-width: 34ch; }
+    .mono-link { display: inline-block; margin-block-start: 1.5rem; }
+  }
+}
+
+.career {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__row {
+    display: grid;
+    gap: 0.5rem 2rem;
+    padding-block: 2rem;
+    border-block-start: 1px solid var(--border-strong);
+
+    @include up($bp-md) { grid-template-columns: 12rem 1fr; }
+
+    h3 { margin: 0 0 0.35rem; font-size: 1.35rem; letter-spacing: -0.02em; }
+    p { margin: 0; }
+    p:last-child { margin-block-start: 0.7rem; color: var(--muted-foreground); }
+  }
+
+  &__period {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  &__org { color: var(--primary); font-size: 0.9375rem; }
+}
+
+/* --- Capacidades --- */
+.caps {
+  display: grid;
+  gap: 3rem 2.5rem;
+  margin-block-start: 3rem;
+
+  @include up($bp-md) { grid-template-columns: repeat(2, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(3, 1fr); }
+
+  &__group {
+    border-block-start: 1px solid var(--border-strong);
+    padding-block-start: 1.5rem;
+
+    h3 { font-size: 1.15rem; margin: 0 0 0.6rem; letter-spacing: -0.02em; }
+    > p { margin: 0; color: var(--muted-foreground); font-size: 0.9375rem; }
+  }
+
+  &__items {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+
+    li {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.5;
+      padding-block: 0.6rem;
+      border-block-end: 1px solid var(--border);
+      color: var(--foreground);
+    }
+  }
+}
+
+/* --- Notas --- */
+.notes {
+  &__top {
+    display: grid;
+    gap: 2.5rem;
+
+    @include up($bp-lg) { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 3.5rem; }
+  }
+
+  &__lead {
+    p:not(.eyebrow) { color: var(--muted-foreground); max-width: 62ch; }
+  }
+
+  &__title {
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    margin: 0.75rem 0 1.25rem;
+
+    a { text-decoration: none; }
+    a:hover { color: var(--primary); }
+  }
+
+  &__rail {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 2.5rem;
+    border-inline-start: 1px solid var(--border);
+
+    li + li { margin-block-start: 1.5rem; padding-block-start: 1.5rem; border-block-start: 1px solid var(--border); }
+
+    .eyebrow { margin: 0 0 0.4rem; }
+
+    a {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      line-height: 1.25;
+      display: block;
+    }
+
+    a:hover { color: var(--primary); }
+  }
+
+  &__tail {
+    list-style: none;
+    display: grid;
+    gap: 2rem;
+    margin: 3rem 0 0;
+    padding-block-start: 2rem;
+    border-block-start: 1px solid var(--border);
+
+    @include up($bp-md) { grid-template-columns: repeat(4, 1fr); }
+
+    .eyebrow { margin: 0 0 0.4rem; }
+
+    a {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      line-height: 1.25;
+    }
+
+    a:hover { color: var(--primary); }
+  }
+}
+
+.mono-link--muted { color: var(--muted-foreground); }
+
+/* --- Fechamento --- */
+.closing {
+  background: var(--graphite);
+  color: var(--ivory);
+
+  &__title { max-width: 18ch; margin-block-end: 3.5rem; }
+
+  &__cols {
+    display: grid;
+    gap: 2.5rem;
+
+    @include up($bp-md) { grid-template-columns: repeat(2, 1fr); gap: 4rem; }
+  }
+
+  &__col {
+    @include up($bp-md) {
+      &:first-child { padding-inline-end: 3rem; border-inline-end: 1px solid var(--graphite-line); }
+    }
+
+    h3 { font-size: clamp(1.35rem, 2.2vw, 1.7rem); letter-spacing: -0.025em; margin: 0.9rem 0 0.9rem; }
+    p { color: oklch(0.8 0.006 92); max-width: 44ch; }
+
+    .btn, .link-arrow { margin-block-start: 1.5rem; }
+    .btn { display: inline-flex; }
+    .link-arrow { display: inline-block; }
+  }
+}
+
+.btn--light {
+  background: var(--ivory);
+  color: var(--graphite);
+
+  &:hover { background: var(--primary); color: var(--ivory); }
+}

@@ -1,0 +1,165 @@
+@use 'tokens' as *;
+
+.site-header {
+  background: var(--paper);
+  border-block-end: 1px solid var(--border);
+  position: relative;
+  z-index: 50;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 5rem;
+
+    @media (max-width: 63.99rem) { flex-wrap: wrap; gap: 1rem; }
+  }
+
+  &__cta { white-space: nowrap; }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+
+  &__mark {
+    width: 2.25rem;
+    height: auto;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.975rem;
+    letter-spacing: -0.01em;
+  }
+
+  &__tagline {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // Scoped to the list: a bare `a` here also matched the CTA button and its
+  // colour won on specificity, painting the label black on black.
+  ul a {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted-foreground);
+    white-space: nowrap;
+    transition: color 0.15s;
+
+    &:hover { color: var(--foreground); }
+  }
+
+  ul a[aria-current="page"],
+  .current-menu-item a { color: var(--foreground); }
+
+  // Below the desktop breakpoint the same markup becomes a full-width panel
+  // under the header: display type, one item per line, CTA at the foot.
+  @media (max-width: 63.99rem) {
+    order: 3;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding-block: 0.5rem 1.5rem;
+
+    // Closed only once the script has taken over, so a no-JS visitor keeps a
+    // usable menu.
+    .has-js &[data-open="false"] { display: none; }
+
+    ul {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    li { border-block-end: 1px solid var(--border); }
+
+    ul a {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      text-transform: none;
+      color: var(--foreground);
+      padding-block: 0.85rem;
+    }
+
+    ul a[aria-current="page"],
+    .current-menu-item a { color: var(--primary); }
+
+    .site-header__cta {
+      align-self: flex-start;
+      width: auto;
+      margin-block-start: 1.5rem;
+    }
+  }
+}
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  cursor: pointer;
+
+  @media (max-width: 63.99rem) {
+    display: grid;
+    place-items: center;
+  }
+
+  &__bars,
+  &__bars::before,
+  &__bars::after {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--foreground);
+  }
+
+  &__bars {
+    position: relative;
+
+    &::before { position: absolute; top: -6px; }
+    &::after { position: absolute; top: 6px; }
+  }
+
+  &[aria-expanded='true'] &__bars { background: transparent; }
+  &[aria-expanded='true'] &__bars::before { top: 0; transform: rotate(45deg); }
+  &[aria-expanded='true'] &__bars::after { top: 0; transform: rotate(-45deg); }
+}
