@@ -440,7 +440,11 @@ add_filter(
 			$lines[] = '';
 		}
 
-		$lines[] = 'LLM-Content: ' . home_url( '/llms.txt' );
+		// Comentário, não diretiva: `LLM-Content` não faz parte do robots.txt e
+		// o validador do Lighthouse trata campo desconhecido como erro — custava
+		// 8 pontos de SEO para anunciar uma coisa que o robots.txt já não
+		// precisa de dizer, porque o llms.txt é procurado na raiz por convenção.
+		$lines[] = '# llms.txt: ' . home_url( '/llms.txt' );
 
 		return $output . implode( "\n", $lines ) . "\n";
 	}
