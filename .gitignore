@@ -4,3 +4,6 @@ node_modules/
 # Build output — gerado pela pipeline, servido a partir do branch production
 assets/css/
 assets/js/
+
+# ACF save path when WP_DEBUG is off — must not be versioned
+acf-json-disabled/

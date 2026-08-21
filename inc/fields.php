@@ -2,8 +2,9 @@
 /**
  * ACF Pro: options page and JSON sync.
  *
- * Field groups live in acf-json/. Edit them in WP admin; ACF writes the JSON
- * back into the theme. Keys stay stable so existing post meta keeps working.
+ * Field groups live in acf-json/. Edit them in WP admin locally (WP_DEBUG).
+ * Keys stay stable so existing post meta keeps working. Production loads JSON
+ * but does not write the theme directory.
  *
  * @package MelquiDigital
  */
