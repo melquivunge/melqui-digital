@@ -1,0 +1,430 @@
+{
+    "menu_order": 5,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1787279224,
+    "key": "group_md_builder",
+    "title": "Construtor de seções",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "fields": [
+        {
+            "key": "field_md_fx_sections",
+            "name": "sections",
+            "label": "Seções",
+            "instructions": "Arraste para reordenar. Remova o que não usar. Deixe vazio para a página renderizar apenas o conteúdo do editor.",
+            "type": "flexible_content",
+            "button_label": "Adicionar seção",
+            "layouts": {
+                "hero": {
+                    "key": "layout_md_hero",
+                    "name": "hero",
+                    "label": "Hero",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_md_fx_hero_tab_copy",
+                            "label": "Conteúdo",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_hero_eyebrow",
+                            "name": "eyebrow",
+                            "label": "Sobrelinha",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_hero_title",
+                            "name": "title",
+                            "label": "Título",
+                            "type": "textarea",
+                            "rows": 3
+                        },
+                        {
+                            "key": "field_md_fx_hero_text",
+                            "name": "text",
+                            "label": "Texto",
+                            "type": "textarea",
+                            "rows": 4
+                        },
+                        {
+                            "key": "field_md_fx_hero_meta",
+                            "name": "meta",
+                            "label": "Rodapé do hero",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_hero_portrait",
+                            "name": "portrait",
+                            "label": "Retrato",
+                            "type": "image",
+                            "return_format": "id",
+                            "preview_size": "medium"
+                        },
+                        {
+                            "key": "field_md_fx_hero_tab_cta",
+                            "label": "Chamadas",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_hero_cta1l",
+                            "name": "cta_label",
+                            "label": "CTA principal — texto",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_hero_cta1u",
+                            "name": "cta_url",
+                            "label": "CTA principal — link",
+                            "type": "url"
+                        },
+                        {
+                            "key": "field_md_fx_hero_cta2l",
+                            "name": "cta2_label",
+                            "label": "CTA secundário — texto",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_hero_cta2u",
+                            "name": "cta2_url",
+                            "label": "CTA secundário — link",
+                            "type": "url"
+                        },
+                        {
+                            "key": "field_md_fx_hero_tab_proof",
+                            "label": "Prova",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_hero_proof",
+                            "name": "proof_rail",
+                            "label": "Trilho de prova",
+                            "type": "repeater",
+                            "layout": "table",
+                            "button_label": "Adicionar item",
+                            "sub_fields": [
+                                {
+                                    "key": "field_md_fx_hero_proof_item",
+                                    "name": "item",
+                                    "label": "Item",
+                                    "type": "text",
+                                    "required": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "work": {
+                    "key": "layout_md_work",
+                    "name": "work",
+                    "label": "Trabalho selecionado",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_md_fx_work_title",
+                            "name": "title",
+                            "label": "Título",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_work_link",
+                            "name": "link_label",
+                            "label": "Link do arquivo",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_work_leads",
+                            "name": "leads",
+                            "label": "Quantos destaques no topo",
+                            "type": "number",
+                            "default_value": 2,
+                            "min": 0,
+                            "max": 4
+                        }
+                    ]
+                },
+                "scale": {
+                    "key": "layout_md_scale",
+                    "name": "scale",
+                    "label": "Escala",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_md_fx_scale_tab_head",
+                            "label": "Cabeçalho",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_scale_eyebrow",
+                            "name": "eyebrow",
+                            "label": "Sobrelinha",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_scale_title",
+                            "name": "title",
+                            "label": "Título",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_scale_text",
+                            "name": "text",
+                            "label": "Texto",
+                            "type": "textarea",
+                            "rows": 3
+                        },
+                        {
+                            "key": "field_md_fx_scale_tab_points",
+                            "label": "Pontos",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_scale_points",
+                            "name": "points",
+                            "label": "Pontos",
+                            "type": "repeater",
+                            "layout": "block",
+                            "button_label": "Adicionar ponto",
+                            "sub_fields": [
+                                {
+                                    "key": "field_md_fx_scale_n",
+                                    "name": "n",
+                                    "label": "Número",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "field_md_fx_scale_pt",
+                                    "name": "title",
+                                    "label": "Título",
+                                    "type": "text",
+                                    "required": 1
+                                },
+                                {
+                                    "key": "field_md_fx_scale_px",
+                                    "name": "text",
+                                    "label": "Texto",
+                                    "type": "textarea",
+                                    "rows": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "services": {
+                    "key": "layout_md_services",
+                    "name": "services",
+                    "label": "Serviços",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_md_fx_services_eyebrow",
+                            "name": "eyebrow",
+                            "label": "Sobrelinha",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_services_title",
+                            "name": "title",
+                            "label": "Título",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "career": {
+                    "key": "layout_md_career",
+                    "name": "career",
+                    "label": "Trajetória",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_md_fx_career_tab_head",
+                            "label": "Cabeçalho",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_career_eyebrow",
+                            "name": "eyebrow",
+                            "label": "Sobrelinha",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_career_title",
+                            "name": "title",
+                            "label": "Título",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_career_text",
+                            "name": "text",
+                            "label": "Texto",
+                            "type": "textarea",
+                            "rows": 3
+                        },
+                        {
+                            "key": "field_md_fx_career_tab_link",
+                            "label": "Link",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_career_link",
+                            "name": "link_label",
+                            "label": "Texto do link",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "capabilities": {
+                    "key": "layout_md_caps",
+                    "name": "capabilities",
+                    "label": "Capacidades",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_md_fx_caps_eyebrow",
+                            "name": "eyebrow",
+                            "label": "Sobrelinha",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_caps_title",
+                            "name": "title",
+                            "label": "Título",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "notes": {
+                    "key": "layout_md_notes",
+                    "name": "notes",
+                    "label": "Notas",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_md_fx_notes_title",
+                            "name": "title",
+                            "label": "Título",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_notes_link",
+                            "name": "link_label",
+                            "label": "Texto do link",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "closing": {
+                    "key": "layout_md_closing",
+                    "name": "closing",
+                    "label": "Fechamento",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_md_fx_closing_tab_title",
+                            "label": "Título",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_closing_title",
+                            "name": "title",
+                            "label": "Título",
+                            "type": "textarea",
+                            "rows": 2
+                        },
+                        {
+                            "key": "field_md_fx_closing_tab_a",
+                            "label": "Coluna 1",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_closing_ae",
+                            "name": "a_eyebrow",
+                            "label": "Coluna 1 — sobrelinha",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_closing_at",
+                            "name": "a_title",
+                            "label": "Coluna 1 — título",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_closing_ax",
+                            "name": "a_text",
+                            "label": "Coluna 1 — texto",
+                            "type": "textarea",
+                            "rows": 3
+                        },
+                        {
+                            "key": "field_md_fx_closing_tab_b",
+                            "label": "Coluna 2",
+                            "name": "",
+                            "type": "tab",
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_md_fx_closing_be",
+                            "name": "b_eyebrow",
+                            "label": "Coluna 2 — sobrelinha",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_closing_bt",
+                            "name": "b_title",
+                            "label": "Coluna 2 — título",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_md_fx_closing_bx",
+                            "name": "b_text",
+                            "label": "Coluna 2 — texto",
+                            "type": "textarea",
+                            "rows": 3
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
