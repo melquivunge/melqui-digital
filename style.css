@@ -1,0 +1,18 @@
+/*
+Theme Name: Melqui Digital
+Theme URI: https://melquivunge.com.br
+Author: Melqui Vunge
+Author URI: https://melquivunge.com.br
+Description: Tema WordPress próprio de Melqui Vunge — editorial, sem page builder, SCSS compilado com Grunt e conteúdo modelado em ACF Pro. Focado em Core Web Vitals, SEO técnico e GEO (answer engines).
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.9
+Requires PHP: 8.1
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: melqui-digital
+Tags: custom-theme, acf, seo, performance
+*/
+
+/* Estilos reais em assets/css/main.css, compilados de src/scss/ pelo Grunt.
+   Este ficheiro existe apenas para o cabeçalho exigido pelo WordPress. */

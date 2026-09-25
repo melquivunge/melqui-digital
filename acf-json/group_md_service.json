@@ -1,0 +1,170 @@
+{
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1787278761,
+    "key": "group_md_service",
+    "title": "Serviço — detalhes",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "md_service"
+            }
+        ]
+    ],
+    "fields": [
+        {
+            "key": "field_md_sv_number",
+            "name": "number",
+            "label": "Número",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sv_h1",
+            "name": "h1",
+            "label": "H1 da página",
+            "type": "text"
+        },
+        {
+            "key": "field_md_sv_tagline",
+            "name": "tagline",
+            "label": "Tagline",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_md_sv_summary",
+            "name": "summary",
+            "label": "Resumo",
+            "type": "textarea",
+            "rows": 4
+        },
+        {
+            "key": "field_md_sv_problem",
+            "name": "problem",
+            "label": "Problema",
+            "type": "textarea",
+            "rows": 4
+        },
+        {
+            "key": "field_md_sv_forwho",
+            "name": "for_who",
+            "label": "Para quem",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Adicionar perfil",
+            "sub_fields": [
+                {
+                    "key": "field_md_sv_forwho_item",
+                    "name": "item",
+                    "label": "Item",
+                    "type": "text",
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_sv_outcomes",
+            "name": "outcomes",
+            "label": "Resultados",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Adicionar resultado",
+            "sub_fields": [
+                {
+                    "key": "field_md_sv_outcomes_item",
+                    "name": "item",
+                    "label": "Item",
+                    "type": "text",
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_sv_caps",
+            "name": "capabilities",
+            "label": "Capacidades",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Adicionar capacidade",
+            "sub_fields": [
+                {
+                    "key": "field_md_sv_caps_item",
+                    "name": "item",
+                    "label": "Item",
+                    "type": "text",
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_sv_process",
+            "name": "process",
+            "label": "Processo",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar etapa",
+            "sub_fields": [
+                {
+                    "key": "field_md_sv_proc_title",
+                    "name": "title",
+                    "label": "Etapa",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_md_sv_proc_text",
+                    "name": "text",
+                    "label": "Descrição",
+                    "type": "textarea",
+                    "rows": 3,
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_sv_faqs",
+            "name": "faqs",
+            "label": "Perguntas frequentes",
+            "instructions": "Alimenta o schema FAQPage — escreva a resposta completa e autossuficiente.",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar pergunta",
+            "sub_fields": [
+                {
+                    "key": "field_md_sv_faq_q",
+                    "name": "q",
+                    "label": "Pergunta",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_md_sv_faq_a",
+                    "name": "a",
+                    "label": "Resposta",
+                    "type": "textarea",
+                    "rows": 4,
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_md_sv_related",
+            "name": "related_project",
+            "label": "Projeto relacionado",
+            "type": "post_object",
+            "post_type": [
+                "md_project"
+            ],
+            "return_format": "id"
+        }
+    ]
+}
