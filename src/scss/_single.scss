@@ -157,11 +157,14 @@
 }
 
 .pj-hero {
+  // Secondary text on graphite needs its own token — the paper value is 2.96:1 here.
+  --muted-foreground: oklch(0.68 0.008 265);
+
   position: relative;
   background: var(--graphite);
   color: var(--ivory);
   overflow: hidden;
-  padding-block: 2.5rem 3.5rem;
+  padding-block: 2rem 2.75rem;
 
   &__grid {
     position: absolute;
@@ -181,36 +184,57 @@
     @include up($bp-lg) { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 4rem; }
   }
 
-  h1 { max-width: 16ch; margin-block: 1rem 0; }
+  h1 { max-width: 16ch; margin-block: 0.85rem 0; }
 
   &__lede {
-    margin-block: 1.75rem 2rem;
-    max-width: 52ch;
+    margin-block: 1.25rem 1.75rem;
+    max-width: 46ch;
+    font-size: 1.05rem;
+    line-height: 1.55;
     color: oklch(0.84 0.006 92);
   }
+
+  .btn { margin-block-start: 0.25rem; }
 
   &__meta {
     margin: 0;
     align-self: end;
+    padding-block-start: 0.5rem;
+    border-block-start: 1px solid var(--graphite-line);
 
-    div + div { margin-block-start: 1.25rem; }
+    @include up($bp-lg) {
+      border-block-start: 0;
+      border-inline-start: 1px solid var(--graphite-line);
+      padding-block-start: 0;
+      padding-inline-start: 2rem;
+    }
+
+    div + div { margin-block-start: 1.1rem; }
 
     dt {
       font-family: var(--font-mono);
       font-size: 0.625rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: oklch(0.6 0.008 265);
+      color: var(--muted-foreground);
     }
 
     dd { margin: 0.3rem 0 0; font-size: 0.9375rem; }
   }
 }
 
-// Full-bleed image, caption aligned back to the grid.
+// Product plate on paper — a dark UI screenshot must not sit full-bleed on graphite.
 .pj-figure {
   margin: 0;
-  background: var(--surface);
+  background: var(--paper);
+  padding-block: 2.5rem 0;
+  border-block-start: 1px solid var(--border);
+
+  &__frame {
+    background: var(--graphite);
+    border: 1px solid var(--border-strong);
+    overflow: hidden;
+  }
 
   img { width: 100%; height: auto; display: block; }
 
@@ -247,10 +271,16 @@
 }
 
 .pj-body {
-  display: grid;
-  gap: 2.5rem;
+  display: block;
+  max-width: 46rem;
 
-  @include up($bp-lg) { grid-template-columns: minmax(0, 0.6fr) minmax(0, 2fr); gap: 4rem; }
+  &--split {
+    max-width: none;
+    display: grid;
+    gap: 2.5rem;
+
+    @include up($bp-lg) { grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr); gap: 4rem; }
+  }
 }
 
 .pj-toc {
@@ -262,28 +292,161 @@
 
   .eyebrow { margin: 0 0 1rem; }
 
-  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.7rem;
+    counter-reset: toc;
+  }
+
+  li { counter-increment: toc; }
 
   a {
     text-decoration: none;
     font-size: 0.875rem;
     color: var(--muted-foreground);
 
+    &::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-inline-end: 0.7rem;
+    }
+
     &:hover { color: var(--primary); }
   }
 }
 
+.pj-sections--numbered { counter-reset: pj; }
+
 .pj-section {
-  & + & { margin-block-start: 3rem; }
+  .pj-sections--numbered & { counter-increment: pj; }
+
+  & + & { margin-block-start: 3.25rem; padding-block-start: 3.25rem; border-block-start: 1px solid var(--border); }
 
   h2 {
-    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
-    letter-spacing: -0.025em;
-    margin-block-end: 1rem;
+    font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+    letter-spacing: -0.03em;
+    margin-block-end: 1.15rem;
     scroll-margin-top: 6rem;
+    max-width: 22ch;
   }
 
-  p { color: var(--muted-foreground); max-width: 68ch; }
+  .pj-sections--numbered & h2::before {
+    content: counter(pj, decimal-leading-zero);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    margin-block-end: 0.55rem;
+  }
+
+  p {
+    color: var(--ink);
+    max-width: 68ch;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  p + p { margin-block-start: 1.15rem; }
+
+  ul, ol {
+    max-width: 68ch;
+    margin: 1.15rem 0 0;
+    padding-inline-start: 1.15rem;
+    color: var(--ink);
+  }
+
+  li + li { margin-block-start: 0.45rem; }
+
+  h3 {
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    margin: 2rem 0 0.7rem;
+  }
+}
+
+.pj-gallery {
+  background: var(--paper);
+  padding-block: 2.5rem 0;
+
+  .eyebrow { margin: 0 0 1.25rem; }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+
+    @include up($bp-sm) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @include up($bp-lg) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  &__item {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--border-strong);
+    background: var(--graphite);
+    cursor: zoom-in;
+    min-height: 44px;
+
+    img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      display: block;
+    }
+
+    &:hover { border-color: var(--ink); }
+    &:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+  }
+}
+
+.pj-lightbox {
+  position: relative;
+  width: min(72rem, calc(100vw - 2rem));
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  background: var(--graphite);
+  color: var(--ivory);
+
+  &::backdrop { background: oklch(0.12 0.008 260 / 0.82); }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 5rem);
+    object-fit: contain;
+  }
+
+  &__close {
+    position: absolute;
+    inset-block-start: 0.75rem;
+    inset-inline-end: 0.75rem;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid var(--graphite-line);
+    background: var(--graphite);
+    color: var(--ivory);
+    font-size: 0.8125rem;
+    cursor: pointer;
+
+    &:hover { border-color: var(--ivory); }
+    &:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  }
 }
 
 .page-hero {
