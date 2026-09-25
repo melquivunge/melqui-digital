@@ -192,6 +192,125 @@ function md_has_case_study( int $post_id ): bool {
 }
 
 /**
+ * Image attachment IDs from the project gallery field.
+ *
+ * Accepts ACF gallery return formats (id, array, WP_Post) and keeps only
+ * real image attachments. Cap matches the field max.
+ *
+ * @return int[]
+ */
+function md_project_gallery_ids( int $post_id ): array {
+	$raw = get_field( 'gallery', $post_id );
+
+	if ( ! is_array( $raw ) ) {
+		return array();
+	}
+
+	$ids = array();
+
+	foreach ( $raw as $item ) {
+		$id = 0;
+
+		if ( is_numeric( $item ) ) {
+			$id = absint( $item );
+		} elseif ( is_array( $item ) ) {
+			$id = absint( $item['ID'] ?? $item['id'] ?? 0 );
+		} elseif ( $item instanceof WP_Post ) {
+			$id = (int) $item->ID;
+		}
+
+		$mime = $id > 0 ? (string) get_post_mime_type( $id ) : '';
+
+		if (
+			$id > 0
+			&& wp_attachment_is_image( $id )
+			&& in_array( $mime, array( 'image/jpeg', 'image/png', 'image/webp', 'image/gif' ), true )
+		) {
+			$ids[] = $id;
+		}
+
+		if ( count( $ids ) >= 16 ) {
+			break;
+		}
+	}
+
+	return array_values( array_unique( $ids ) );
+}
+
+/**
+ * Editorial plate gallery. Sources come only from attachment IDs.
+ */
+function md_render_project_gallery( int $post_id ): void {
+	$ids = md_project_gallery_ids( $post_id );
+
+	if ( ! $ids ) {
+		return;
+	}
+	?>
+	<section class="pj-gallery" data-gallery aria-label="<?php esc_attr_e( 'Galeria do projeto', 'melqui-digital' ); ?>">
+		<div class="container">
+			<p class="eyebrow"><?php esc_html_e( 'Galeria', 'melqui-digital' ); ?></p>
+
+			<ul class="pj-gallery__grid">
+				<?php foreach ( $ids as $index => $attachment_id ) : ?>
+					<?php
+					$full = wp_get_attachment_image_url( $attachment_id, 'large' );
+					$alt  = (string) get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+					$n    = $index + 1;
+
+					if ( ! $full ) {
+						continue;
+					}
+
+					$label = $alt
+						? sprintf(
+							/* translators: %s: image alternative text. */
+							__( 'Ampliar: %s', 'melqui-digital' ),
+							$alt
+						)
+						: sprintf(
+							/* translators: %d: image position in the gallery. */
+							__( 'Ampliar imagem %d', 'melqui-digital' ),
+							$n
+						);
+					?>
+					<li>
+						<button
+							type="button"
+							class="pj-gallery__item"
+							data-gallery-open
+							data-src="<?php echo esc_url( $full ); ?>"
+							data-alt="<?php echo esc_attr( $alt ); ?>"
+							aria-label="<?php echo esc_attr( $label ); ?>"
+						>
+							<?php
+							echo wp_get_attachment_image(
+								$attachment_id,
+								'md-card',
+								false,
+								array(
+									'loading' => 'lazy',
+									'alt'     => $alt,
+								)
+							);
+							?>
+						</button>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+
+		<dialog class="pj-lightbox" data-gallery-dialog aria-label="<?php esc_attr_e( 'Imagem ampliada', 'melqui-digital' ); ?>">
+			<button type="button" class="pj-lightbox__close" data-gallery-close>
+				<?php esc_html_e( 'Fechar', 'melqui-digital' ); ?>
+			</button>
+			<img alt="" data-gallery-img>
+		</dialog>
+	</section>
+	<?php
+}
+
+/**
  * Call to action under a project card: read it, or say why there is nothing to
  * read yet.
  */

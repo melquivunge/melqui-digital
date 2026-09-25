@@ -8,7 +8,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1787278761,
+    "modified": 1790357683,
     "key": "group_md_project",
     "title": "Projeto — detalhes",
     "location": [
@@ -21,6 +21,14 @@
         ]
     ],
     "fields": [
+        {
+            "key": "field_md_pj_tab_details",
+            "label": "Detalhes",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
         {
             "key": "field_md_pj_context",
             "name": "context",
@@ -61,12 +69,6 @@
             "rows": 4
         },
         {
-            "key": "field_md_pj_img_note",
-            "name": "image_note",
-            "label": "Nota da imagem",
-            "type": "text"
-        },
-        {
             "key": "field_md_pj_ext_label",
             "name": "external_label",
             "label": "Rótulo do link externo",
@@ -91,6 +93,42 @@
             "label": "Destaque",
             "type": "true_false",
             "ui": 1
+        },
+        {
+            "key": "field_md_pj_tab_media",
+            "label": "Galeria",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_md_pj_img_note",
+            "name": "image_note",
+            "label": "Nota da imagem de capa",
+            "type": "text"
+        },
+        {
+            "key": "field_md_pj_gallery",
+            "name": "gallery",
+            "label": "Galeria de fotos",
+            "type": "gallery",
+            "instructions": "Imagens da biblioteca de mídia. A capa do projeto continua a ser a imagem destacada.",
+            "return_format": "id",
+            "preview_size": "medium",
+            "insert": "append",
+            "library": "all",
+            "min": 0,
+            "max": 16,
+            "mime_types": "jpg,jpeg,png,webp,gif"
+        },
+        {
+            "key": "field_md_pj_tab_case",
+            "label": "Case study",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_md_pj_facts",

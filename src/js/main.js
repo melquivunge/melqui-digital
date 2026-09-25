@@ -50,3 +50,77 @@
     }
   });
 })();
+
+/**
+ * Project gallery lightbox. Image URLs come from the server-rendered
+ * data-src attributes (attachment large size), never from free text.
+ */
+(function () {
+  var root = document.querySelector('[data-gallery]');
+
+  if (!root) {
+    return;
+  }
+
+  var dialog = root.querySelector('[data-gallery-dialog]');
+  var frame = dialog ? dialog.querySelector('[data-gallery-img]') : null;
+
+  if (!dialog || !frame) {
+    return;
+  }
+
+  function closeLightbox() {
+    if (dialog.open) {
+      dialog.close();
+    }
+
+    frame.removeAttribute('src');
+    frame.alt = '';
+  }
+
+  root.addEventListener('click', function (event) {
+    var trigger = event.target.closest('[data-gallery-open]');
+
+    if (!trigger || !root.contains(trigger)) {
+      return;
+    }
+
+    var src = trigger.getAttribute('data-src') || '';
+    var alt = trigger.getAttribute('data-alt') || '';
+    var parsed;
+
+    try {
+      parsed = new URL(src, window.location.origin);
+    } catch (error) {
+      return;
+    }
+
+    if (
+      (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') ||
+      parsed.origin !== window.location.origin
+    ) {
+      return;
+    }
+
+    frame.src = parsed.href;
+    frame.alt = alt;
+    dialog.showModal();
+  });
+
+  var closer = dialog.querySelector('[data-gallery-close]');
+
+  if (closer) {
+    closer.addEventListener('click', closeLightbox);
+  }
+
+  dialog.addEventListener('click', function (event) {
+    if (event.target === dialog) {
+      closeLightbox();
+    }
+  });
+
+  dialog.addEventListener('close', function () {
+    frame.removeAttribute('src');
+    frame.alt = '';
+  });
+})();
